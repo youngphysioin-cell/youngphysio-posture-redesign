@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Noto Sans", sans-serif;
+  --font-body: "Noto Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  /* surfaces */
+  --color-cream: #050505;
+  --color-sand: #0b0b0b;
+  --color-card: #101010;
+  --color-well: #161616;
+
+  /* text */
+  --color-ink: #f5f5f5;
+  --color-ink-soft: #dedede;
+  --color-muted: #a8a8a8;
+  --color-faint: #777;
+
+  /* lines */
+  --color-line: #262626;
+  --color-line-soft: #1e1e1e;
+
+  /* brand accent — warm gold */
+  --color-accent: #d6a94e;
+  --color-accent-deep: #f0c86e;
+  --color-accent-soft: #1d1910;
+
+  /*
+    Semantic status colours.
+    Token names are preserved from the previous theme so the analysis
+    library (posture.ts) needs no changes:
+      scan = within expected range · info = mild · warn = moderate · risk = notable
+  */
+  --color-scan: #6fd0a8;
+  --color-scan-soft: #10241d;
+  --color-info: #d6a94e;
+  --color-info-soft: #241f10;
+  --color-warn: #d58a3a;
+  --color-warn-soft: #26190f;
+  --color-risk: #e0715d;
+  --color-risk-soft: #291411;
+
+  --shadow-card: 0 1px 2px rgba(63, 50, 28, 0.05), 0 14px 36px -18px rgba(63, 50, 28, 0.16);
+  --shadow-lift: 0 2px 4px rgba(63, 50, 28, 0.06), 0 22px 48px -20px rgba(63, 50, 28, 0.22);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 24%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 8px; }
+
+/* ---------------- ambient backdrop ---------------- */
+.clinic-bg {
+  background:
+    radial-gradient(900px 420px at 85% -60px, color-mix(in srgb, var(--color-accent) 9%, transparent), transparent 65%),
+    radial-gradient(760px 420px at -80px 220px, color-mix(in srgb, var(--color-scan) 7%, transparent), transparent 60%),
+    var(--color-cream);
+}
+.dot-field {
+  background-image: radial-gradient(color-mix(in srgb, var(--color-ink) 9%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(720px 420px at 78% 0%, #000 20%, transparent 75%);
+}
+
+/* ---------------- surfaces ---------------- */
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line-soft);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+}
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-line));
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-deep);
+}
+
+.value-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------- buttons ---------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  padding: 0 1.35rem;
+  border-radius: 13px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: translateY(1px) scale(0.99); }
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  box-shadow: 0 10px 24px -12px rgba(31, 31, 31, 0.5);
+}
+.btn-primary:hover { background: #35322c; }
+.btn-accent {
+  background: var(--color-accent);
+  color: #fffdf9;
+  box-shadow: 0 12px 26px -12px rgba(176, 138, 80, 0.65);
+}
+.btn-accent:hover { background: var(--color-accent-deep); }
+.btn-outline {
+  background: var(--color-card);
+  color: var(--color-ink);
+  border-color: var(--color-line);
+}
+.btn-outline:hover { border-color: var(--color-accent); color: var(--color-accent-deep); }
+.btn-soft {
+  background: var(--color-sand);
+  color: var(--color-ink-soft);
+}
+.btn-soft:hover { background: var(--color-accent-soft); color: var(--color-accent-deep); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---------------- badges / chips ---------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.32rem 0.75rem;
+  font-size: 12.5px;
+  font-weight: 600;
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+  color: var(--color-ink-soft);
+}
+
+/* ---------------- motion ---------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 0.7, 0.25, 1);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+.anim-floaty { animation: floaty 5s ease-in-out infinite; }
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.92); }
+}
+.anim-pulse-soft { animation: pulseSoft 1.6s ease-in-out infinite; }
+
+@keyframes spinCalm { to { transform: rotate(360deg); } }
+.anim-spin-calm { animation: spinCalm 1.4s linear infinite; }
+
+@keyframes tickIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.tick-in { animation: tickIn 0.45s cubic-bezier(0.22, 0.7, 0.25, 1) both; }
+
+@keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.bar-grow { transform-origin: left; animation: barGrow 0.9s cubic-bezier(0.22, 0.7, 0.25, 1) both; }
+
+@keyframes breatheRing {
+  0%, 100% { transform: scale(0.96); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+.anim-breathe { animation: breatheRing 2.8s ease-in-out infinite; }
+
+/* accordion */
+.acc-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.22, 0.7, 0.25, 1);
+}
+.acc-body.open { grid-template-rows: 1fr; }
+.acc-inner { overflow: hidden; min-height: 0; }
+
+/* ---------------- print ---------------- */
+@media print {
+  .no-print { display: none !important; }
+  body, .clinic-bg { background: #ffffff !important; }
+  .card { box-shadow: none !important; border-color: #ddd6c8 !important; break-inside: avoid; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  main { max-width: 100% !important; }
+}
+
+
+/* Young Physio posture checker – dark visual system */
+body { background:#050505; color:#f5f5f5; font-family:"Noto Sans",sans-serif; }
+.clinic-bg { background: radial-gradient(900px 500px at 72% 10%, rgba(111,208,168,.08), transparent 60%), #050505; }
+.hero-photo-card { background:#0d0d0d; }
+.hero-photo { width:100%; height:430px; object-fit:cover; display:block; filter:contrast(1.04) saturate(.94); }
+.hero-photo-label { position:absolute; left:14px; bottom:14px; padding:7px 10px; border-radius:999px; background:rgba(5,5,5,.78); border:1px solid rgba(255,255,255,.14); color:#f5f5f5; font-size:10px; font-weight:800; letter-spacing:.12em; }
+.hero-analysis-badge { position:absolute; left:22px; top:22px; display:flex; align-items:center; gap:8px; padding:9px 12px; border-radius:999px; background:rgba(5,5,5,.82); border:1px solid rgba(255,255,255,.12); color:#f5f5f5; font-size:10px; font-weight:800; letter-spacing:.12em; }
+@media(max-width:640px){ .hero-photo { height:310px; } }
